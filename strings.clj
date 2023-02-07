@@ -29,38 +29,38 @@
 ;   "Maybe you want to separate out all your lines"
   (println (= ["1" "2" "3"] (clojure.string/split-lines "1\n2\n3")))
 
-; ;   "You may want to make sure your words are backwards"
-;   (println )(= __ (string/reverse "hello"))
+;   "You may want to make sure your words are backwards"
+  (println (= "olleh" (clojure.string/reverse "hello")))
 
-; ;   "Maybe you want to find the index of the first occurrence of a substring"
-;   (println )(= 0 (string/index-of "hello world" __))
+;   "Maybe you want to find the index of the first occurrence of a substring"
+  (println (= 0 (clojure.string/index-of "hello world" "hello" 0))) ; returns index of element(index-of str ele starting index)
 
-; ;   "Or maybe the last index of the same substring"
-;   (println )(= __ (string/last-index-of "hello world, hello" "hello"))
+;   "Or maybe the last index of the same substring"
+  (println (= 13 (clojure.string/last-index-of "hello world, hello" "hello"))) ; returns last index of given value
 
-; ;   "But when something doesn't exist, nothing is found"
-;   (println )(= __ (string/index-of "hello world" "bob"))
+;   "But when something doesn't exist, nothing is found"
+  (println (= nil (clojure.string/index-of "hello world" "bob")))
 
-; ;   "Sometimes you don't want whitespace cluttering the front and back"
-;   (println )(= __ (string/trim "  \nhello world \t \n"))
+;   "Sometimes you don't want whitespace cluttering the front and back"
+  (println (= "hello world" (clojure.string/trim "  \nhello world \t \n"))) ; Removes whitespace from both ends of string.
 
-; ;   "You can check if something is a char"
-;   (println )(= __ (char? \c))
+;   "You can check if something is a char"
+  (println (= true (char? \c)))
 
-; ;   "But it may not be"
-;   (println )(= __ (char? "a"))
+;   "But it may not be"
+  (println (= false (char? "a")))
 
-; ;   "But chars aren't strings"
-;   (println )(= __ (string? \b))
+;   "But chars aren't strings"
+  (println (= false (string? \b)))
 
-; ;   "Strings are strings"
-;   (println )(= true (string? __))
+;   "Strings are strings"
+  (println (= true (string? "hello")))
 
-; ;   "Some strings may be blank"
-;   (println )(= __ (string/blank? ""))
+;   "Some strings may be blank"
+  (println (= true (clojure.string/blank? "")))
+  
+;   "Even if at first glance they aren't"
+  (println (= true (clojure.string/blank? " \n \t  ")))
 
-; ;   "Even if at first glance they aren't"
-;   (println )(= __ (string/blank? " \n \t  "))
-
-; ;   "However, most strings aren't blank"
-;   (println )(= __ (string/blank? "hello?\nare you out there?"))
+;   "However, most strings aren't blank"
+  (println )(= false (clojure.string/blank? "hello?\nare you out there?"))
