@@ -68,3 +68,21 @@
 
 
 ; win and lose logic
+(defn win [field]
+  (= 2048
+     (transduce
+       (filter number?)
+       (completing max)
+       0
+       (flatten field))))
+
+(defn lose [field]
+  (empty? (filter (partial = \space) (flatten field))))
+
+(defn startGame [y x]
+  (->> (vec (repeat y (vec (repeat x \space))))
+       (add)
+       (add)))
+
+; game implementation
+
