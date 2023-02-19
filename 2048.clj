@@ -118,8 +118,8 @@
 (defn play-2048 []
   (loop [field (startGame (:y size) (:x size))]
     (println (field->str field))
-    (cond (win field) (println "You win")
-          (lose field) (println "You lose")
+    (cond (win field) (println "You won")
+          (lose field) (println "You lost")
           :default (recur (overflow field)))))
 
 (play-2048)
