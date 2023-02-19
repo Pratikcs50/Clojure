@@ -1,17 +1,17 @@
-
-(def layout {  :boundary      "----+"
+;board design 
+(def layout {  :boundary      "*****"
                :cell      "%4s|"
                :cellEdge "|"
-               :boundaryEdge "+"})
+               :boundaryEdge "*"})
 
 (def directions {:w :up
                  :s :down
                  :a :left
                  :d :right})
 
-(def field-size {:y 4 :x 4})
+(def size {:y 4 :x 4})
 
-;board design 
+
 
 ;cells design 
 (defn cells->str [line]                    
@@ -85,4 +85,41 @@
        (add)))
 
 ; game implementation
+(defn lines [back? direction field]
+  (case direction
+    :left field
+    :right (reverseRow field)
+    :down (if back?
+            (getColumns (reverseRow field))
+            (reverseRow (getColumns field)))
+    :up (getColumns field)))
 
+(defn shift [line]
+  (let [len (count line)
+        line (vec (filter number? line))
+        max-idx (dec (count line))]
+    (loop [new [] idx 0]
+      (if (> idx max-idx)
+          (padding new (- len (count new)) \space)
+          (if (= (nth line idx) (get line (inc idx)))
+              (recur (conj new (* 2 (nth line idx))) (+ 2 idx))
+              (recur (conj new (nth line idx)) (inc idx)))))))
+
+(defn shiftingField [direction field]
+  (->> (lines false direction field)
+       (mapv shift)
+       (lines true direction)))
+
+(defn overflow [field]
+  (let [direction (inputKeys)]
+    (->> (shiftingField direction field)
+         (add))))
+
+(defn play-2048 []
+  (loop [field (startGame (:y size) (:x size))]
+    (println (field->str field))
+    (cond (win field) (println "You win")
+          (lose field) (println "You lose")
+          :default (recur (overflow field)))))
+
+(play-2048)
