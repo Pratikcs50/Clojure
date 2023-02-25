@@ -115,11 +115,11 @@
     (->> (shiftingField direction field)
          (add))))
 
-(defn play-2048 []
+(defn play []
   (loop [field (startGame (:y size) (:x size))]
     (println (field->str field))
     (cond (win field) (println "You won")
-          (lose field) (println "You lost")
+          (lose field) (println "Game Over")
           :default (recur (overflow field)))))
 
-(play-2048)
+(play)
