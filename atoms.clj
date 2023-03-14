@@ -26,3 +26,4 @@
   (println (= :fin (do
             (compare-and-set! atomic-clock 20 :fin)
             @atomic-clock)))
+
